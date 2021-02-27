@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->integer('stock');
             $table->string('image');
             $table->enum('category',['drinks', 'food', 'dessert']);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
