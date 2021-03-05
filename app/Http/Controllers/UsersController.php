@@ -6,6 +6,7 @@ use App\User;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserStore;
+use App\Http\Requests\UserUpdate;
 
 
 class UsersController extends Controller
@@ -37,24 +38,31 @@ class UsersController extends Controller
 	    return response()->json(['message' => \DB::transaction($create), 'status' => $this->status], $this->status);
     }
 
-    public function showLoggedUser()
-    {
-        return Auth::user()->select('name', 'email', 'image', 'id as sku')->first();
-    }
-
-    public function show($id)
-    {
-
-    }
-
     public function edit($id)
     {
-        //
+        $user = User::where('id', $id)->select('name', 'email', 'id as sku')->first();
+        if($user) return $user;
+        else {
+            $this->status = 404;
+            return response()->json(['Message'=> 'Not found','status' => $this->status], $this->status);
+        }
     }
 
-    public function update(Request $request, $id)
+    public function update(UserUpdate $request, User $user)
     {
-        //
+        $create = function() use ($request, $user){
+			try{
+				$user->fill($request->all());
+				$user->save();
+				$this->status = 200;
+				return 'Se ha actualizado correctamente';
+			}catch(\Exception $e){
+				$this->status = 500;
+				dd($e);
+				return 'Hubo un error al actualizar, intentelo nuevamente';
+			}
+		};
+		return response()->json(['message'=>\DB::transaction($create), 'status' => $this->status], $this->status);
     }
 
     public function destroy($id)

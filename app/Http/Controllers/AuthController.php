@@ -27,20 +27,7 @@ class AuthController extends Controller
                 'Accept' => 'application/json'
             ]
         ]);
-
-        // $response = $http->post('http://127.0.0.1:8001/oauth/token', [
-        //     'form_params' => [
-        //         'grant_type' => 'password',
-        //         'client_id' => 2,
-        //         'client_secret' => 'tyRGxnp8bMLDD6WkB8ECc5SSPePD38SYlzBwcUho',
-        //         'username' => $request->username,
-        //         'password' => $request->password,
-        //     ],
-        //     'headers' => [
-        //         'Accept' => 'application/json'
-        //     ]
-        // ]);
-
+        
         $response = json_decode((string)$response->getBody(), true);
         return response()->json($response, 200);
     }

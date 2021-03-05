@@ -25,6 +25,12 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($value);
     }
     
+    public function scopeUsers($query)
+    {
+        return $query;
+    }
+
+    //funciones de relación.
     public function products()
     {
         return $this->hasMany(Product::class, 'user_id', 'id');
