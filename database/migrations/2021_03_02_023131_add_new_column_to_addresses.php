@@ -27,7 +27,7 @@ class AddNewColumnToAddresses extends Migration
     public function down()
     {
         Schema::table('addresses', function (Blueprint $table) {
-            $table->dropIfExist('street2');   
+            $table->dropColumn('street2');   
             $table->string('internal_street', 30)->nullable(false)->change();
         });
     }

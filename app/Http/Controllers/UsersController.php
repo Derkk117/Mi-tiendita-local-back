@@ -29,7 +29,7 @@ class UsersController extends Controller
 				$user = User::create($request->all());
 				return 'Se ha creado correctamente';
 			}catch(\Exception $e){
-				//dd($e);
+				dd($e);
 				$this->status = 500;
 				return 'Hubo un error al registrar, intentelo nuevamente';
 			}

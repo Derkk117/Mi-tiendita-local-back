@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->integer('address');
             $table->softDeletes();
             $table->timestamps();
+            
         });
     }
     
