@@ -14,4 +14,8 @@ class Supplier extends Model
     protected $fillable = ['name', 'last_name', 'phone' ,'email', 'address'];
     protected $hidden = [];
 
+    public function scopeSuppliers($query)
+    {
+        return $query;
+    }
 }
