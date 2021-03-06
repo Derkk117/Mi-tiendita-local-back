@@ -29,7 +29,6 @@ class ClientsController extends Controller
 			}
 		};
 	    return response()->json(['message' => \DB::transaction($create), 'status' => $this->status], $this->status);
-   
     }
 
     public function edit($id)
