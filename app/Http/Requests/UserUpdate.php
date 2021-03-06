@@ -22,8 +22,9 @@ class UserUpdate extends FormRequest
 
     public function rules()
     {
+        $id = $this->route('user')->id;
         return [
-            'email' => 'required|email|'.Rule::unique('users')->ignore(Auth::user()->id, 'id')
+            'email' => 'required|email|'.Rule::unique('users')->ignore($id, 'id')
         ];
     }
 
