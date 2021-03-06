@@ -29,7 +29,7 @@ class SuppliersController extends Controller
     {
         $create = function() use ($request){
 			try{
-				$sup = Supplier::create($request->all());
+				$supplier = Supplier::create($request->all());
 				return 'Se ha creado correctamente';
 			}catch(\Exception $e){
 				dd($e);
@@ -42,23 +42,20 @@ class SuppliersController extends Controller
 
     public function edit($id)
     {
-        $sup = Supplier::where('id', $id)->select('name', 'last_name', 'phone','email','address')->first();
-        if($sup) return $sup;
+        $supplier = Supplier::where('id', $id)->select('name', 'last_name', 'phone','email','address')->first();
+        if($supplier) return $supplier;
         else {
             $this->status = 404;
             return response()->json(['Message'=> 'Not found','status' => $this->status], $this->status);
         }
     }
 
-    public function update(SupplierUpdate $request, Supplier $sup)
+    public function update(SupplierUpdate $request, Supplier $supplier)
     {
-        
-        
-        //return "Puede actualizar";
-        $create = function() use ($request, $sup){
+        $create = function() use ($request, $supplier){
             try{
-                $sup->fill($request->all());
-                $sup->save();
+                $supplier->fill($request->all());
+                $supplier->save();
                 $this->status = 200;
                 return 'Se ha actualizado correctamente';
             }catch(\Exception $e){

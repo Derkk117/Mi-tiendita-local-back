@@ -23,11 +23,10 @@ class SupplierUpdate extends FormRequest
 
     public function rules()
     {
-        $id = $this->route('supplier')->id;
-        dd($id);
         return [
-            //'email' => 'required|email|'.Rule::unique('suppliers')->ignore(Auth::user()->id, 'id')
-            'email' => $this->route('supplier')->email;
+            'phone' => 'required|string|size:10',
+            'email' => 'required|email|',
+            'name' => 'required'
         ];
     }
 
@@ -36,7 +35,8 @@ class SupplierUpdate extends FormRequest
         return [
             'email.required' => 'El correo es un campo obligatorio',
             'email.email' => 'El correo debe que tener el siguiente formato correo@sacar.com',
-            'email.unique' => 'El correo ya se encuentra registrado, intente con otro',
+            'name.required' => 'El nombre es un campo obligatorio',
+            'phone.required' => 'El telefono de contato es un campo requerido',
         ];
     }
 
