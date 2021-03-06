@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Supplier extends Model
 {
-    //
-
     use SoftDeletes;
 
     protected $fillable = ['name', 'last_name', 'phone' ,'email', 'address'];
     protected $hidden = [];
 
+    public function scopeSuppliers($query)
+    {
+        return $query;
+    }
 }

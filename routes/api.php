@@ -12,4 +12,11 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::put('/user/{user}/update', 'UsersController@update');
 	
 	Route::get('/users', 'UsersController@index');
+
+	///Supplier 
+	Route::post('/suppliers', 'SuppliersController@store');
+	Route::get('/suppliers', 'SuppliersController@index');
+	Route::get('/supplier/{id}/edit', 'SuppliersController@edit');
+	Route::put('/supplier/{supplier}/update', 'SuppliersController@update');
+	Route::delete('/supplier/{supplier}/destroy', 'SuppliersController@destroy');
 });
