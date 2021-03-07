@@ -12,4 +12,11 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::put('/user/{user}/update', 'UsersController@update');
 	
 	Route::get('/users', 'UsersController@index');
+
+	//Crud Sales
+	Route::post('/sales', 'SalesController@store');
+	Route::get('/sales', 'SalesController@index');
+	Route::get('/sales/{id}/edit', 'SalesController@edit');
+	Route::put('/sales/{sale}/update', 'SalesController@update');
+	Route::delete('/sales/{sale}/destroy', 'SalesController@destroy');
 });
