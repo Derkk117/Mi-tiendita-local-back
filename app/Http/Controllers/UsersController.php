@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use Auth;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserStore;
 use App\Http\Requests\UserUpdate;

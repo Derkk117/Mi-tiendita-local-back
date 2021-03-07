@@ -13,6 +13,11 @@ class Product extends Model
     protected $fillable = ['name', 'user_id', 'description', 'price', 'cost', 'stock', 'image', 'category'];
     protected $hidden = [];
 
+    public function scopeProducts($query)
+    {
+        return $query;
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

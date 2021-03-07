@@ -1,12 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Supplier;
-use Auth;
 
-use Illuminate\Support\Arr;
+use App\Supplier;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use App\Http\Requests\SupplierStore;
 use App\Http\Requests\SupplierUpdate;
 
