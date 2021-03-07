@@ -27,4 +27,11 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::post('/product', 'ProductsController@store');
 	Route::get('/product/{product}/edit', 'ProductsController@edit');
 	Route::post('/product/{product}/update', 'ProductsController@update');
+
+	//Crud Sales
+	Route::post('/sales', 'SalesController@store');
+	Route::get('/sales', 'SalesController@index');
+	Route::get('/sales/{id}/edit', 'SalesController@edit');
+	Route::put('/sales/{sale}/update', 'SalesController@update');
+	Route::delete('/sales/{sale}/destroy', 'SalesController@destroy');
 });
