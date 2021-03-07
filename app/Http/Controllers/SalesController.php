@@ -42,7 +42,7 @@ class SalesController extends Controller
     public function edit($id)
     {
         $sale = Sale::where('id', $id)->select('products', 'payment_method', 'card_number','card_cvc','expiration_date')->first();
-        if($supplier) return $supplier;
+        if($sale) return $sale;
         else {
             $this->status = 404;
             return response()->json(['Message'=> 'Not found','status' => $this->status], $this->status);
@@ -52,7 +52,7 @@ class SalesController extends Controller
     //Actualiza los elementos de Sale 
     public function update(SaleUpdate $request, Sale $sale)
     {
-        $create = function() use ($request, $sa)
+        $create = function() use ($request, $sale)
         {
             try{
 				$sale->fill($request->all());

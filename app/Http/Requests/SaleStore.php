@@ -17,24 +17,21 @@ class SaleStore extends FormRequest
     public function prepareForValidation()
     {
         $this->merge(['id' => '1']);
-        $this->merge(['email' => strtolower($this->email)]);
     }
 
     public function rules()
     {
         return [
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required'
+            'products' => 'required',
+            'payment_method' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Name is a required field.',
-            'email.required' => 'Email is a required field.',
-            'password.required' => 'Password is a required field.',
+            'products.required' => 'Products is a required field. Almost select one product',
+            'payment_method.required' => 'payment_method is a required field.'
         ];
     }
 
