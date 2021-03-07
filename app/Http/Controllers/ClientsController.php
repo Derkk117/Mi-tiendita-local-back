@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ClientStore;
-use Illuminate\Http\Request;
-use App\Client;
 use Auth;
+use App\Client;
+use Illuminate\Http\Request;
+use App\Http\Requests\ClientStore;
+use App\Http\Requests\ClientUpdate;
 
 
 class ClientsController extends Controller
@@ -23,7 +24,7 @@ class ClientsController extends Controller
 				$client = Client::create($request->all());
 				return 'Se ha creado correctamente';
 			}catch(\Exception $e){
-				//dd($e);
+				dd($e);
 				$this->status = 500;
 				return 'Hubo un error al registrar, intentelo nuevamente';
 			}

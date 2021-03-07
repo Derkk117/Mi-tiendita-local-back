@@ -23,8 +23,9 @@ class ClientUpdate extends FormRequest
 
     public function rules()
     {
+        $id = $this->route('client')->id;
         return [
-            'email' => 'required|email|'.Rule::unique('clients')->ignore(Auth::client()->id, 'id')
+            'email' => 'required|email|'.Rule::unique('clients')->ignore($id, 'id')
         ];
     }
 
