@@ -18,4 +18,8 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::get('/supplier/{id}/edit', 'SuppliersController@edit');
 	Route::put('/supplier/{supplier}/update', 'SuppliersController@update');
 	Route::delete('/supplier/{supplier}/destroy', 'SuppliersController@destroy');
+
+	Route::post('/client','ClientsController@store');
+    Route::get('/client/{id}/edit','ClientsController@edit');
+	Route::put('/client/{client}/update','ClientsController@update');
 });
