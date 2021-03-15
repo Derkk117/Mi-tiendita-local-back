@@ -34,4 +34,10 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::get('/sales/{id}/edit', 'SalesController@edit');
 	Route::put('/sales/{sale}/update', 'SalesController@update');
 	Route::delete('/sales/{sale}/destroy', 'SalesController@destroy');
+
+	//Crud Street 
+	Route::post('/addresses','AddressesController@store');
+	Route::get('/addresses','AddressesController@index');
+	Route::get('/addresses/{id}/edit','AddressesController@edit');
+	Route::put('/addresses/{address}/update','AddressesController@update');
 });
