@@ -8,10 +8,14 @@ Route::post('sign-up', 'UsersController@store');
 
 Route::group(['middleware' => 'auth:api'], function() {
 	Route::post('/logout', 'AuthController@logout');
-	
 	Route::get('/users', 'UsersController@index');
-	Route::get('/user/{user}/edit', 'UsersController@edit');
+	Route::get('/user/{id}/edit', 'UsersController@edit');
 	Route::put('/user/{user}/update', 'UsersController@update');
+
+	//Delivery
+	Route::post('/deliveries', 'DeliveriesController@store');
+	Route::get('/deliveries/{id}/edit', 'DeliveriesController@edit');
+	Route::put('/deliveries/{delivery}/update', 'DeliveriesController@update');
 	
 	Route::get('/suppliers', 'SuppliersController@index');
 	Route::post('/suppliers', 'SuppliersController@store');
