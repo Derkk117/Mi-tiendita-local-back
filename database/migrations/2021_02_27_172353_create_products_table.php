@@ -9,8 +9,8 @@ class CreateProductsTable extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->id();
-            $table->integer('user_id');
+            $table->string('id', 50)->unique()->index();
+            $table->unsignedBigInteger('user_id');
             $table->string('name', 120);
             $table->text('description');
             $table->float('price');
@@ -18,8 +18,11 @@ class CreateProductsTable extends Migration
             $table->integer('stock');
             $table->string('image');
             $table->enum('category',['drinks', 'food', 'dessert']);
+            $table->string('slug')->unique();
             $table->softDeletes();
             $table->timestamps();
+
+			$table->foreign('user_id')->references('id')->on('users');
         });
     }
 

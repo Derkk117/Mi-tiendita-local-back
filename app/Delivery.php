@@ -10,4 +10,9 @@ class Delivery extends Model
     use SoftDeletes;
     protected $fillable = ['delivery_id','estimated_date','delivered_date','sale_id'];
     protected $hidden = [];
+
+    public function Sale() 
+    {
+        return $this->belongsTo('App\Sale');
+    }
 }

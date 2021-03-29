@@ -14,14 +14,17 @@ class CreateSuppliersTable extends Migration
     public function up()
     {
         Schema::create('suppliers', function (Blueprint $table) {
-            $table->id();
+            $table->string('id', 50)->unique()->index();
             $table->string('name',30);
             $table->string('last_name',30);
             $table->string('phone',30);
             $table->string('email')->unique();
-            $table->integer('address');
+            $table->unsignedBigInteger('address');
+            $table->string('slug')->unique();
             $table->softDeletes();
             $table->timestamps();
+
+			$table->foreign('address')->references('id')->on('addresses');
         });
     }
 

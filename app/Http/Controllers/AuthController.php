@@ -15,6 +15,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $http = new \GuzzleHttp\Client;
+        return $request;
         $response = $http->post(env('PASSPORT_LOGIN_ENDPOINT'), [
             'form_params' => [
                 'grant_type' => 'password',

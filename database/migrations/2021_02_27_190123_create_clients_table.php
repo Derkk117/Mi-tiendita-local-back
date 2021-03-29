@@ -10,8 +10,8 @@ class CreateClientsTable extends Migration
     public function up()
     {
         Schema::create('clients', function (Blueprint $table) {
-            $table->id();
-            $table->integer('client_id');
+            $table->string('id', 50)->unique()->index();
+            $table->unsignedBigInteger('user_id');
             $table->string('name', 30);
             $table->string('last_name', 30);
             $table->string('email')->unique();
@@ -21,6 +21,8 @@ class CreateClientsTable extends Migration
             $table->enum('client_type', ['whatsApp', 'facebook', 'instagram']);
             $table->softDeletes();
             $table->timestamps();
+
+			$table->foreign('user_id')->references('id')->on('users');
         });
     }
 

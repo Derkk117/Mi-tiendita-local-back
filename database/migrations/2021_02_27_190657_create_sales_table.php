@@ -9,9 +9,9 @@ class CreateSalesTable extends Migration
     public function up()
     {
         Schema::create('sales', function (Blueprint $table) {
-            $table->id();
-            $table->integer('client_id');
-            $table->integer('user_id');
+            $table->string('id', 50)->unique()->index();
+            $table->string('client_id', 50);
+            $table->unsignedBigInteger('user_id');
             $table->text('products');
             $table->enum('payment_method', ["cash","card"]);
             $table->string('card_number')->nullable();
@@ -19,6 +19,9 @@ class CreateSalesTable extends Migration
             $table->date('expiration_date')->nullable();
             $table->softDeletes();
             $table->timestamps();
+            
+			$table->foreign('user_id')->references('id')->on('users');
+			$table->foreign('client_id')->references('id')->on('clients');
         });
     }
 

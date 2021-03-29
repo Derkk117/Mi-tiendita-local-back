@@ -23,17 +23,17 @@ class AddressStore extends FormRequest
     {
         return [
             'street' => 'required',
-            'external_street' => 'required',
-            'postal_code' => 'required'
+            'external_number' => 'required',
+            'zip_code' => 'required'
         ];
     }
 
     public function messages()
     {
         return [
-            'street.required' => 'Products is a required field. Almost select one product',
-            'external_street.required' => 'payment_method is a required field.',
-            'postal_code.required' => 'PC is a required field.'
+            'street.required' => 'Street is a required field',
+            'external_number.required' => 'External number is a required field.',
+            'zip_code.required' => 'Zip code is a required field.'
         ];
     }
 

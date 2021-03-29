@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Product;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -30,9 +29,32 @@ class User extends Authenticatable
         return $query;
     }
 
-    //funciones de relación.
     public function products()
     {
-        return $this->hasMany(Product::class, 'user_id', 'id');
+        return $this->hasMany('App\Product', 'user_id', 'id');
+    }
+
+    public function Clients()
+    {
+        return $this->hasMany('App\Client', 'user_id', 'id');
+    }
+
+    public function Sales()
+    {
+        return $this->hasMany('App\Sale', 'user_id', 'id');
+    }
+    
+    public function Cutoffs() {
+        return $this->hasMany('App\Cutoff', 'user_id', 'id');
+    }
+
+    public function Suppliers()
+    {
+        return $this->belongsToMany('App\Supplier');
+    }
+
+    public function Address()
+    {
+        return $this->hasOne('App\Address');
     }
 }

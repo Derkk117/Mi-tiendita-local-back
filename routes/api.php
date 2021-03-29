@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login', 'AuthController@login');
 Route::post('sign-up', 'UsersController@store');  
+Route::post('/address','AddressesController@store');
 
 Route::group(['middleware' => 'auth:api'], function() {
 	Route::post('/logout', 'AuthController@logout');
@@ -12,7 +13,6 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::get('/user/{id}/edit', 'UsersController@edit');
 	Route::put('/user/{user}/update', 'UsersController@update');
 
-	//Delivery
 	Route::post('/deliveries', 'DeliveriesController@store');
 	Route::get('/deliveries/{id}/edit', 'DeliveriesController@edit');
 	Route::put('/deliveries/{delivery}/update', 'DeliveriesController@update');
@@ -32,16 +32,13 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::get('/product/{product}/edit', 'ProductsController@edit');
 	Route::post('/product/{product}/update', 'ProductsController@update');
 
-	//Crud Sales
 	Route::post('/sales', 'SalesController@store');
 	Route::get('/sales', 'SalesController@index');
 	Route::get('/sales/{id}/edit', 'SalesController@edit');
 	Route::put('/sales/{sale}/update', 'SalesController@update');
 	Route::delete('/sales/{sale}/destroy', 'SalesController@destroy');
-
-	//Crud Street 
-	Route::post('/addresses','AddressesController@store');
-	Route::get('/addresses','AddressesController@index');
-	Route::get('/addresses/{id}/edit','AddressesController@edit');
-	Route::put('/addresses/{address}/update','AddressesController@update');
+ 
+	Route::get('/address','AddressesController@index');
+	Route::get('/address/{id}/edit','AddressesController@edit');
+	Route::put('/address/{address}/update','AddressesController@update');
 });

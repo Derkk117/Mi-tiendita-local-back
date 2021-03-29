@@ -9,14 +9,15 @@ class CreateAddressesTable extends Migration
     public function up()
     {
         Schema::create('addresses', function (Blueprint $table) {
-            $table->id();
-            $table->integer('address_id');
+            $table->bigIncrements('id');
             $table->string('street');
-            $table->string('external_street', 30);
-            $table->string('internal_street', 30);
-            $table->string('suburb');
-            $table->enum('state', ['Local', 'Extranjero']);
-            $table->string('postal_code', 8);
+            $table->string('street2')->nullable();
+            $table->string('external_number');
+            $table->string('internal_number')->nullable();
+            $table->string('neighborhood');
+            $table->string('country');
+            $table->string('state');
+            $table->string('zip_code', 5);
             $table->softDeletes();
             $table->timestamps();
         });

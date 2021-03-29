@@ -10,12 +10,15 @@ class CreateDeliveriesTable extends Migration
     {
         Schema::create('deliveries', function (Blueprint $table) {
             $table->id();
-            $table->integer('delivery_id');
-            $table->string('estimated_date')->nullable();
-            $table->string('delivered_date')->nullable();
-            $table->integer('sale_id');
+            $table->string('sale_id',50)->unique();
+            $table->date('estimated_date')->nullable()->change();
+            $table->date('delivered_date')->nullable()->change();
+            $table->text('place');
+            $table->enum('status',['Delivered', 'Pending', 'Canceled', 'On the way']);
             $table->softDeletes();
             $table->timestamps();
+
+			$table->foreign('sale_id')->references('id')->on('sales');
         });
     }
 
