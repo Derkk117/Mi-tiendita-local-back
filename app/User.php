@@ -12,7 +12,7 @@ class User extends Authenticatable
 {
     use Notifiable, SoftDeletes, HasApiTokens;
 
-    protected $fillable = ['name', 'last_name', 'email', 'password', 'address'];
+    protected $fillable = ['name', 'last_name', 'email', 'password', 'address', 'store'];
     protected $hidden = ['password', 'remember_token',];
 
     protected $casts = [
@@ -55,6 +55,11 @@ class User extends Authenticatable
 
     public function Address()
     {
-        return $this->hasOne('App\Address');
+        return $this->hasOne('App\Address', 'address', 'id');
+    }
+
+    public function Store()
+    {
+        return $this->hasOne('App\Store', 'store', 'id');
     }
 }

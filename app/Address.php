@@ -25,4 +25,9 @@ class Address extends Model
     {
         return $this->belongsTo('App\Supplier', 'address', 'id');
     }
+
+    public function Store()
+    {
+        return $this->belongsTo('App\Store', 'address', 'id');
+    }
 }
