@@ -9,6 +9,7 @@ Route::post('/address','AddressesController@store');
 
 Route::group(['middleware' => 'auth:api'], function() {
 	Route::post('/logout', 'AuthController@logout');
+	Route::get('/current', 'UsersController@current');
 	Route::get('/users', 'UsersController@index');
 	Route::get('/user/{id}/edit', 'UsersController@edit');
 	Route::put('/user/{user}/update', 'UsersController@update');

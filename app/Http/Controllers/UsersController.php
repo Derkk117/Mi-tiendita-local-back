@@ -69,4 +69,8 @@ class UsersController extends Controller
     {
         //
     }
+
+    public function current(){
+        return Auth::User()->with('address')->first();
+    }
 }

@@ -55,11 +55,11 @@ class User extends Authenticatable
 
     public function Address()
     {
-        return $this->hasOne('App\Address', 'address', 'id');
+        return $this->hasOne('App\Address', 'id', 'address');
     }
 
     public function Store()
     {
-        return $this->hasOne('App\Store', 'store', 'id');
+        return $this->hasOne('App\Store', 'id', 'store_id');
     }
 }
