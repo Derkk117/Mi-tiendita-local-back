@@ -42,4 +42,9 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::get('/address','AddressesController@index');
 	Route::get('/address/{id}/edit','AddressesController@edit');
 	Route::put('/address/{address}/update','AddressesController@update');
+
+	Route::get('/stores','StoresController@index');
+	Route::post('/stores','StoresController@store');
+	Route::get('/store/{store}/edit','StoresController@edit');
+	Route::put('/store/{store}/update','StoresController@update');
 });
