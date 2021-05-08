@@ -41,7 +41,7 @@ class AddressesController extends Controller
     
     public function edit($id)
     {
-        $address = Address::where('id', $id)->select('street', 'internal_street', 'suburb','state','postal_code')->first();
+        $address = Address::where('id', $id)->select('street', 'street2', 'external_number','internal_number', 'neighborhood','country','state','zip_code')->first();
         if($address) return $address;
         else {
             $this->status = 404;
