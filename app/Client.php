@@ -10,8 +10,8 @@ class Client extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['user_id', 'name', 'last_name', 'email', 'password', 'payment_method', 'phone', 'client_type'];
-    protected $hidden = ['updated_at', 'deleted_at', 'id', 'created_at'];
+    protected $fillable = ['id', 'user_id', 'password', 'name', 'last_name', 'email', 'payment_method', 'phone', 'client_type'];
+    protected $hidden = ['updated_at', 'deleted_at', 'id', 'created_at', 'password', 'user_id'];
 	protected $table = 'clients';
 	public $incrementing = false;
 	protected $keyType = 'string';
@@ -26,6 +26,11 @@ class Client extends Model
 		else
 			$sku = 'CLI'.str_pad((intval(substr($client->id, 3)) + 1), 3, '0', STR_PAD_LEFT);
 		$this->attributes['id'] = $sku;
+	}
+
+	public function scopeClients($query, $user)
+	{
+		return $query->where('user_id', $user->id)->select('id as sku', 'name', 'last_name', 'email', 'phone', 'payment_method', 'client_type');
 	}
 
     public function Sales()

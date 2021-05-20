@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Client;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\ClientStore;
 use App\Http\Requests\ClientUpdate;
@@ -12,9 +13,10 @@ use App\Http\Requests\ClientUpdate;
 class ClientsController extends Controller
 {
     public $status = 200;
-    public function create()
+
+    public function index(User $user)
     {
-        //
+        return response()->json(Client::clients($user)->get());
     }
 
     public function store(ClientStore $request)

@@ -18,11 +18,6 @@ class SalesController extends Controller
         return response()->json(Sale::sales()->get());
     }
 
-    public function create()
-    {
-        
-    }
-
     public function store(SaleStore $request)
     {
         $create = function() use ($request){
