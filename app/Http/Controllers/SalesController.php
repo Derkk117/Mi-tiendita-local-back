@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Sale;
+use App\User;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\SaleStore;
@@ -13,9 +14,9 @@ class SalesController extends Controller
 {
 	public $status = 200;
 
-    public function index()
+    public function index(User $user)
     {
-        return response()->json(Sale::sales()->get());
+        return response()->json(Sale::sales($user)->get());
     }
 
     public function store(SaleStore $request)
