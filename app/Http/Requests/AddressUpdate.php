@@ -17,17 +17,16 @@ class AddressUpdate extends FormRequest
 
     public function prepareForValidation()
     {
-        $this->merge(['email' => strtolower($this->email)]);
+        $this->merge(['id' => '1']);
     }
 
     public function rules()
     {
         return [
             'street' => 'required',
-            'external_street' => 'required',
-            'suburb' => 'required',
-            'state' => 'required',
-            'postal_code' => 'required'
+            'external_number' => 'required',
+            'neighborhood' => 'required',
+            'zip_code' => 'required'
         ];
     }
 
@@ -35,8 +34,8 @@ class AddressUpdate extends FormRequest
     {
         return [
             'street' => 'Street is a requiered field',
-            'external_street' => 'External number is a requiered field',
-            'postal_code' => 'PC is a requiered field',
+            'external_number' => 'External number is a requiered field',
+            'zip code' => 'zip code is a requiered field',
         ];
     }
 
