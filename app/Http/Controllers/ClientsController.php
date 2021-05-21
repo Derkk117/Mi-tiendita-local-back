@@ -34,14 +34,10 @@ class ClientsController extends Controller
 	    return response()->json(['message' => \DB::transaction($create), 'status' => $this->status], $this->status);
     }
 
-    public function edit($id)
+    public function edit(Client $client)
     {
-        $client = Client::where('id', $id)->select('name', 'email', 'id as sku')->first();
         if($client) return $client;
-        else {
-            $this->status = 404;
-            return response()->json(['Message'=> 'Not found','status' => $this->status], $this->status);
-        }
+        else return response()->json(['Message'=> 'Not found','status' => $this->status], $this->status);
     }
 
     public function update(ClientUpdate $request, Client $client)
