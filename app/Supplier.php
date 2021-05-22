@@ -10,9 +10,9 @@ class Supplier extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['name', 'last_name', 'phone' ,'email', 'address', 'slug'];
+    protected $fillable = ['id','name', 'last_name', 'phone' ,'email', 'address', 'slug'];
     protected $hidden = ['updated_at', 'deleted_at', 'id', 'created_at'];
-	protected $table = 'clients';
+	protected $table = 'suppliers';
 	public $incrementing = false;
 	protected $keyType = 'string';
 	public $timestamps = true;
@@ -30,7 +30,7 @@ class Supplier extends Model
 
     public function setSlugAttribute($value)
 	{
-		$this->attributes['slug'] = Str::slug($value);
+		$this->attributes['slug'] = Str::slug($this->attributes['name']." ".$this->attributes['last_name']." ".explode("@",$this->attributes['email'])[0], '-');
 	}
 
     public function scopeSuppliers($query)
