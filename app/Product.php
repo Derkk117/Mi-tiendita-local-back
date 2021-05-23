@@ -10,7 +10,7 @@ class Product extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['name', 'user_id', 'description', 'price', 'cost', 'stock', 'image', 'category', 'slug'];
+    protected $fillable = ['id', 'name', 'user_id', 'description', 'price', 'cost', 'stock', 'image', 'category', 'slug'];
     protected $hidden = ['updated_at', 'deleted_at', 'id', 'created_at'];
 	protected $table = 'products';
 	public $incrementing = false;
@@ -33,9 +33,10 @@ class Product extends Model
 		$this->attributes['slug'] = Str::slug($value);
 	}
 
-    public function scopeProducts($query)
+    public function scopeProducts($query, $user)
     {
-        return $query;
+        return $query->where('user_id', $user->id)->select('id as sku', 
+        'name', 'description', 'price', 'cost', 'stock', 'image', 'category');
     }
 
     public function User()
