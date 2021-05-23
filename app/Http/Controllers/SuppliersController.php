@@ -37,9 +37,9 @@ class SuppliersController extends Controller
 	    return response()->json(['message' => \DB::transaction($create), 'status' => $this->status], $this->status);
     }
 
-    public function edit($id)
+    public function edit($slug)
     {
-        $supplier = Supplier::where('id', $id)->select('name', 'last_name', 'phone','email','address')->first();
+        $supplier = Supplier::where('slug', $slug)->select('name', 'last_name', 'phone','email','address')->first();
         if($supplier) return $supplier;
         else {
             $this->status = 404;
