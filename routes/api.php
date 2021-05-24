@@ -48,4 +48,7 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::post('/stores','StoresController@store');
 	Route::get('/store/{store}/edit','StoresController@edit');
 	Route::put('/store/{store}/update','StoresController@update');
+
+	Route::get('/histories/{user}', 'HistoriesController@index');
+	Route::post('/histories','HistoriesController@store');
 });
