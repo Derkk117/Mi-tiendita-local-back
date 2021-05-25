@@ -10,7 +10,7 @@ class Client extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['id', 'user_id', 'password', 'name', 'last_name', 'email', 'payment_method', 'phone', 'client_type'];
+    protected $fillable = ['id', 'user_id', 'name', 'last_name', 'email', 'payment_method', 'phone', 'client_type'];
     protected $hidden = ['updated_at', 'deleted_at', 'id', 'created_at', 'password', 'user_id'];
 	protected $table = 'clients';
 	public $incrementing = false;

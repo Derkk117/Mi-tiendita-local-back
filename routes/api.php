@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::get('/clients/{user}', 'ClientsController@index');
     Route::get('/client/{client}/edit', 'ClientsController@edit');
 	Route::put('/client/{client}/update', 'ClientsController@update');
+	Route::delete('/client/{client}/destroy', 'ClientsController@destroy');
 
 	Route::get('/products/{user}', 'ProductsController@index');
 	Route::post('/product', 'ProductsController@store');

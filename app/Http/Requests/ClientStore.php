@@ -24,8 +24,7 @@ class ClientStore extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'required',
-            'password' => 'required'
+            'email' => 'required'
         ];
     }
 
@@ -33,8 +32,7 @@ class ClientStore extends FormRequest
     {
         return [
             'name.required' => 'Name is a required field.',
-            'email.required' => 'Email is a required field.',
-            'password.required' => 'Password is a required field.',
+            'email.required' => 'Email is a required field.'
         ];
     }
 
