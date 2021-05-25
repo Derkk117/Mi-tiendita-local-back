@@ -14,7 +14,7 @@ class HistoryStore extends FormRequest
     }
 
     public function prepareForValidation(){
-        $this->merge(['id' => '1']);
+        //$this->merge(['id' => '1']);
     }
 
     public function rules()

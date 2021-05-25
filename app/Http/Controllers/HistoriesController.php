@@ -29,6 +29,7 @@ class HistoriesController extends Controller
 				dd($e);
 				$this->status = 500;
 				return 'Hubo un error al registrar, intentelo nuevamente';
+                //return $e;
 			}
 		};
 	    return response()->json(['message' => \DB::transaction($create), 'status' => $this->status], $this->status);
