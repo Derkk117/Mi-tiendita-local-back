@@ -31,9 +31,10 @@ class Sale extends Model
 		$this->attributes['id'] = $sku;
 	}
 
-    public function scopeSales($query)
+    public function scopeSales($query,$user)
     {
-        return $query;
+        return $query->where('user_id', $user->id)->select('id as sku', 
+        'products', 'payment_method', 'card_number', 'card_cvc', 'expiration_date');;
     }
 
     public function Products()
