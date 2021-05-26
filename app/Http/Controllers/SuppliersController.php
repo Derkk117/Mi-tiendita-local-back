@@ -17,7 +17,6 @@ class SuppliersController extends Controller
         return response()->json(Supplier::suppliers()->get());
     }
 
-
     public function store(SupplierStore $request)
     {
         $create = function() use ($request){
