@@ -59,6 +59,20 @@ class SalesController extends Controller
 		return response()->json(['message'=>\DB::transaction($create), 'status' => $this->status], $this->status);
     }
 
+	public function destroy(Sale $sale)
+	{
+		$create = function() use ($sale){
+			try{
+				$sale->delete();
+				return 'Se ha eliminado correctamente';
+			}catch(\Exception $e){
+				dd($e);
+				$this->status = 500;
+				return 'Hubo un error al eliminar, intentelo nuevamente';
+			}
+		};
+		return response()->json(['message'=>\DB::transaction($create), 'status' => $this->status]);
+	}
     //Actualiza los elementos de Sale 
     /*public function update(SaleUpdate $request, Sale $sale)
     {
