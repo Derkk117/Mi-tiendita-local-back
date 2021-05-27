@@ -34,6 +34,8 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::post('/product', 'ProductsController@store');
 	Route::get('/product/{product}/edit', 'ProductsController@edit');
 	Route::post('/product/{product}/update', 'ProductsController@update');
+	//Eliminar productos 
+	Route::delete('/product/{product}/destroy', 'ProductsController@destroy');
 
 	Route::post('/sales', 'SalesController@store');
 	Route::get('/sales/{user}', 'SalesController@index');

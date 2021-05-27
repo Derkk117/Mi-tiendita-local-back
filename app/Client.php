@@ -30,7 +30,8 @@ class Client extends Model
 
 	public function scopeClients($query, $user)
 	{
-		return $query->where('user_id', $user->id)->select('id as sku', 'name', 'last_name', 'email', 'phone', 'payment_method', 'client_type');
+		return $query->where('user_id', $user->id)->select('id as sku', 
+		'name', 'last_name', 'email', 'phone', 'payment_method', 'client_type');
 	}
 
     public function Sales()

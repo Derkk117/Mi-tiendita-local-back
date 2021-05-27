@@ -35,26 +35,25 @@ class ProductsController extends Controller
 				return 'Hubo un error al registrar, intentelo nuevamente';
 			}
 		};
-	    return response()->json(['message' => \DB::transaction($create), 'status' => $this->status], $this->status);
+	    return response()->json(['message' => \DB::transaction($create), 
+        'status' => $this->status], $this->status);
     }
 
-    public function edit(Product $product)//$id)
+    //Funcion para editar los productos
+    public function edit($id)
     {
-        if($product) 
-            return $product;
-        else 
-            return response()->json(['Message'=> 'Not found','status' => $this->status], $this->status);
-        /*$product = Product::where('id', $id)->select('name', 'description', 'price','stock','cost', 'image', 'category')->first();
+        $product = Product::where('id', $id)->select('name', 'description', 
+        'price','stock','cost', 'image', 'category')->first();
         if($product) return $product;
         else {
             $this->status = 404;
             return response()->json(['Message'=> 'Not found','status' => $this->status], $this->status);
-        }*/
+        }
     }
 
     public function update(ProductUpdate $request, Product $product)
     {
-        $create = function() use ($request, $product){
+        $actualizar = function() use ($request, $product){
 			try{
                 if($image = $request->file('file')){
                     $image_name = "MiTienditaLocalProduct".date("Y_m_d_H_i_s").".".$image->extension();
@@ -71,6 +70,28 @@ class ProductsController extends Controller
 				return 'Hubo un error al registrar, intentelo nuevamente';
 			}
 		};
-	    return response()->json(['message' => \DB::transaction($create), 'status' => $this->status], $this->status);
+	    return response()->json(['message' => \DB::transaction($actualizar), 
+        'status' => $this->status], $this->status);
     }
+
+    //Funcion de eliminar productos 
+    public function destroy(Product $product)
+	{
+		$eliminar = function() use ($product){
+			try
+            {
+				$product->delete();
+				return 'Se ha eliminado correctamente el producto';
+			}catch(\Exception $e)
+            {
+				dd($e);
+				$this->status = 500;
+				return 'Hubo un error al eliminar, intentelo nuevamente';
+			}
+		};
+		return response()->json(['message'=>\DB::transaction($eliminar), 'status' => $this->status]);
+	}
+
+
+
 }
