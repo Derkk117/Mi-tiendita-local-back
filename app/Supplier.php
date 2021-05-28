@@ -35,7 +35,7 @@ class Supplier extends Model
 
     public function scopeSuppliers($query)
     {
-        return $query;
+        return $query->join('addresses','suppliers.address','addresses.id');
     }
 
     public function Users()

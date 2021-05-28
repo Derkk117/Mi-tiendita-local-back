@@ -17,11 +17,6 @@ class SuppliersController extends Controller
         return response()->json(Supplier::suppliers()->get());
     }
 
-    public function create()
-    {
-        //
-    }
-
     public function store(SupplierStore $request)
     {
         $create = function() use ($request){
@@ -64,7 +59,18 @@ class SuppliersController extends Controller
         return response()->json(['message'=>\DB::transaction($create), 'status' => $this->status], $this->status);
     }
 
-    public function destroy($id){
-        
+    public function destroy(/*Supplier $supplier*/$slug){
+        $supplier = Supplier::where('slug', $slug)->first();
+        $create = function() use ($supplier) {
+            try{
+                $supplier->delete();
+                return 'Proveedor eliminado';
+            }catch(\Exception $e){
+                dd($e);
+                $this->status = 500;
+                return 'Error al eliminar';
+            }
+        };
+        return response()->json(['message'=>\DB::transaction($create), 'status' => $this->status]);
     }
 }

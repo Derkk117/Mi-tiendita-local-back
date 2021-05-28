@@ -56,4 +56,19 @@ class ClientsController extends Controller
 		};
 		return response()->json(['message'=>\DB::transaction($create), 'status' => $this->status], $this->status);
     }
+
+	public function destroy(Client $client)
+	{
+		$create = function() use ($client){
+			try{
+				$client->delete();
+				return 'Se ha eliminado correctamente';
+			}catch(\Exception $e){
+				dd($e);
+				$this->status = 500;
+				return 'Hubo un error al eliminar, intentelo nuevamente';
+			}
+		};
+		return response()->json(['message'=>\DB::transaction($create), 'status' => $this->status]);
+	}
 }

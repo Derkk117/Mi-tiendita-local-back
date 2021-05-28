@@ -30,15 +30,18 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::get('/clients/{user}', 'ClientsController@index');
     Route::get('/client/{client}/edit', 'ClientsController@edit');
 	Route::put('/client/{client}/update', 'ClientsController@update');
+	Route::delete('/client/{client}/destroy', 'ClientsController@destroy');
 
 	Route::get('/products/{user}', 'ProductsController@index');
 	Route::post('/product', 'ProductsController@store');
 	Route::get('/product/{product}/edit', 'ProductsController@edit');
 	Route::post('/product/{product}/update', 'ProductsController@update');
+	//Eliminar productos 
+	Route::delete('/product/{product}/destroy', 'ProductsController@destroy');
 
 	Route::post('/sales', 'SalesController@store');
 	Route::get('/sales/{user}', 'SalesController@index');
-	Route::get('/sales/{id}/edit', 'SalesController@edit');
+	Route::get('/sales/{sale}/edit', 'SalesController@edit');
 	Route::put('/sales/{sale}/update', 'SalesController@update');
 	Route::delete('/sales/{sale}/destroy', 'SalesController@destroy');
  
@@ -55,4 +58,6 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::get('/cutoff', 'CutoffController@index');
 	Route::get('/cutoff/{id}/edit', 'CutoffController@edit');
 	Route::delete('/cutoff/{cutoff}/destroy', 'CutoffController@destroy');
+	Route::get('/histories/{user}', 'HistoriesController@index');
+	Route::post('/histories','HistoriesController@store');
 });

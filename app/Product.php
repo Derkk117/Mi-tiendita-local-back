@@ -10,7 +10,8 @@ class Product extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['id', 'name', 'user_id', 'description', 'price', 'cost', 'stock', 'image', 'category', 'slug'];
+    protected $fillable = ['id', 'name', 'user_id', 'description', 'price', 'cost', 
+    'stock', 'image', 'category', 'slug'];
     protected $hidden = ['updated_at', 'deleted_at', 'id', 'created_at'];
 	protected $table = 'products';
 	public $incrementing = false;

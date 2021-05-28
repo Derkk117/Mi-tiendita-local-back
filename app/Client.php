@@ -10,7 +10,7 @@ class Client extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['id', 'user_id', 'password', 'name', 'last_name', 'email', 'payment_method', 'phone', 'client_type'];
+    protected $fillable = ['id', 'user_id', 'name', 'last_name', 'email', 'payment_method', 'phone', 'client_type','password'];
     protected $hidden = ['updated_at', 'deleted_at', 'id', 'created_at', 'password', 'user_id'];
 	protected $table = 'clients';
 	public $incrementing = false;
@@ -30,7 +30,8 @@ class Client extends Model
 
 	public function scopeClients($query, $user)
 	{
-		return $query->where('user_id', $user->id)->select('id as sku', 'name', 'last_name', 'email', 'phone', 'payment_method', 'client_type');
+		return $query->where('user_id', $user->id)->select('id as sku', 
+		'name', 'last_name', 'email', 'phone', 'payment_method', 'client_type');
 	}
 
     public function Sales()
