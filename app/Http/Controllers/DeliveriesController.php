@@ -13,9 +13,9 @@ class DeliveriesController extends Controller
 {
 	public $status = 200;
 
-    public function index()
+    public function index(User $user)
     {
-        return response()->json(Delivery::deliveries()->get());
+        return response()->json(Delivery::deliveries($user)->get());
     }
 
     public function create()
@@ -39,14 +39,10 @@ class DeliveriesController extends Controller
     }
     
     //Editar campos de Delivery
-    public function edit($id)
+    public function edit(Delivery $delivery)
     {
-        $delivery = Delivery::where('id', $id)->select('delivery_id', 'estimated_date', 'delivered_date', 'sale_id')->first();
         if($delivery) return $delivery;
-        else {
-            $this->status = 404;
-            return response()->json(['Message'=> 'Not found','status' => $this->status], $this->status);
-        }
+        else return response()->json(['Message'=> 'Not found','status' => $this->status], $this->status);
     }
 
     //Actualizar los campos de Sale 
@@ -68,8 +64,18 @@ class DeliveriesController extends Controller
 		return response()->json(['message'=>\DB::transaction($create), 'status' => $this->status], $this->status);
     }
 
-    public function destroy($id)
+    public function destroy(Delivery $delivery)
     {
-
+        $create = function() use ($delivery){
+			try{
+				$delivery->delete();
+				return 'Se ha eliminado correctamente';
+			}catch(\Exception $e){
+				dd($e);
+				$this->status = 500;
+				return 'Hubo un error al eliminar, intentelo nuevamente';
+			}
+		};
+		return response()->json(['message'=>\DB::transaction($create), 'status' => $this->status]);
     }
 }

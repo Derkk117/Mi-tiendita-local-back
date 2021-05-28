@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Cutoff extends Model
 {
     use SoftDeletes;
-    protected $fillable = ['user_id', 'initial_date', 'final_date', 'total'];
-    protected $hidden = ['updated_at', 'deleted_at', 'id', 'created_at'];
+    protected $fillable = ['id','user_id', 'initial_date', 'final_date', 'total'];
+    protected $hidden = ['updated_at', 'deleted_at', 'id', 'created_at', 'user_id'];
     protected $table = 'cutoff';
     public $incrementing = false;
 	protected $keyType = 'string';
@@ -26,14 +26,15 @@ class Cutoff extends Model
 		$this->attributes['id'] = $sku;
 	}
 
-    public function scopeCutoff($query)
-    {
-        return $query;
-    }
+	public function scopeCutoff($query, $user)
+	{
+		return $query->where('user_id', $user->id)->select('id as sku', 
+		'initial_date', 'final_date', 'total');
+	}
 
     public function Sales()
     {
-        return $this->belongsToMany('App\Sales');
+        return $this->belongsToMany('App\Sale');
     }
 
     public function User() 

@@ -13,9 +13,9 @@ class CutoffController extends Controller
 {
 	public $status = 200;
 
-    public function index()
+    public function index(User $user)
     {
-        return response()->json(Cutoff::cutoff()->get());
+        return response()->json(Cutoff::cutoff($user)->get());
     }
 
     public function create()
@@ -39,18 +39,41 @@ class CutoffController extends Controller
     }
 
     //Edita los elementos de Cutoff
-    public function edit($id)
+    public function edit(Cutoff $cutoff)
     {
-        $cutoff = Cutoff::where('id', $id)->select('initial_date', 'final_date', 'total')->first();
         if($cutoff) return $cutoff;
-        else {
-            $this->status = 404;
-            return response()->json(['Message'=> 'Not found','status' => $this->status], $this->status);
-        }
+        else return response()->json(['Message'=> 'Not found','status' => $this->status], $this->status);
     }
 
-    public function destroy($id)
+    public function update(CutoffUpdate $request, Cutoff $cutoff)
     {
-
+        $create = function() use ($request, $cutoff){
+			try{
+				$cutoff->fill($request->all());
+				$cutoff->save();
+				$this->status = 200;
+				return 'Se ha actualizado correctamente';
+			}catch(\Exception $e){
+				$this->status = 500;
+				dd($e);
+				return 'Hubo un error al actualizar, intentelo nuevamente';
+			}
+		};
+		return response()->json(['message'=>\DB::transaction($create), 'status' => $this->status], $this->status);
     }
+
+	public function destroy(Cutoff $cutoff)
+	{
+		$create = function() use ($cutoff){
+			try{
+				$cutoff->delete();
+				return 'Se ha eliminado correctamente';
+			}catch(\Exception $e){
+				dd($e);
+				$this->status = 500;
+				return 'Hubo un error al eliminar, intentelo nuevamente';
+			}
+		};
+		return response()->json(['message'=>\DB::transaction($create), 'status' => $this->status]);
+	}
 } 
