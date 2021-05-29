@@ -14,9 +14,11 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::get('/user/{id}/edit', 'UsersController@edit');
 	Route::put('/user/{user}/update', 'UsersController@update');
 
+	Route::get('/deliveries/{user}', 'DeliveriesController@index');
 	Route::post('/deliveries', 'DeliveriesController@store');
-	Route::get('/deliveries/{id}/edit', 'DeliveriesController@edit');
+	Route::get('/deliveries/{delivery}/edit', 'DeliveriesController@edit');
 	Route::put('/deliveries/{delivery}/update', 'DeliveriesController@update');
+	Route::delete('/deliveries/{delivery}/destroy', 'DeliveriesController@destroy');
 	
 	Route::get('/suppliers', 'SuppliersController@index');
 	Route::post('/suppliers', 'SuppliersController@store');
@@ -52,6 +54,10 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::get('/store/{store}/edit','StoresController@edit');
 	Route::put('/store/{store}/update','StoresController@update');
 
+	Route::post('/cutoff', 'CutoffController@store');
+	Route::get('/cutoff/{user}', 'CutoffController@index');
+	Route::get('/cutoff/{cutoff}/edit', 'CutoffController@edit');
+	Route::delete('/cutoff/{cutoff}/destroy', 'CutoffController@destroy');
 	Route::get('/histories/{user}', 'HistoriesController@index');
 	Route::post('/histories','HistoriesController@store');
 });
