@@ -28,8 +28,7 @@ class Delivery extends Model
 
     public function scopeDeliveries($query, $user)
     {
-        return $query->where('user_id', $user->id)->select('id as sku', 
-		'place', 'status');
+        return $query->where('user_id', $user->id)->select('id as sku', 'place', 'status');
     }
 
     public function Sales() 
