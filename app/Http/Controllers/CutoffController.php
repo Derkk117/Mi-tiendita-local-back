@@ -13,14 +13,24 @@ class CutoffController extends Controller
 {
 	public $status = 200;
 
+<<<<<<< HEAD
     public function index(User $user)
     {
         return response()->json(Cutoff::cutoff($user)->get());
+=======
+    public function index()
+    {
+        return response()->json(Cutoff::cutoff()->get());
+>>>>>>> 6dd2a2ab73b7bf32ee9c5768125df98427a7b31a
     }
 
     public function create()
     {
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 6dd2a2ab73b7bf32ee9c5768125df98427a7b31a
     }
 
     public function store(CutoffStore $request)
@@ -37,6 +47,7 @@ class CutoffController extends Controller
 		};
 	    return response()->json(['message' => \DB::transaction($create), 'status' => $this->status], $this->status);
     }
+<<<<<<< HEAD
 
     //Edita los elementos de Cutoff
     public function edit(Cutoff $cutoff)
@@ -77,3 +88,22 @@ class CutoffController extends Controller
 		return response()->json(['message'=>\DB::transaction($create), 'status' => $this->status]);
 	}
 } 
+=======
+    
+    //Edita los elementos de Cutoff
+    public function edit($id)
+    {
+        $cutoff = Cutoff::where('id', $id)->select('initial_date', 'final_date', 'total')->first();
+        if($cutoff) return $cutoff;
+        else {
+            $this->status = 404;
+            return response()->json(['Message'=> 'Not found','status' => $this->status], $this->status);
+        }
+    }
+
+    public function destroy($id)
+    {
+
+    }
+}
+>>>>>>> 6dd2a2ab73b7bf32ee9c5768125df98427a7b31a

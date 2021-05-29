@@ -11,8 +11,8 @@ class Sale extends Model
 {
     use SoftDeletes;
     
-    protected $fillable = ['id','client_id', 'user_id','products', 'payment_method', 'card_number', 'card_cvc', 'expiration_date','id'];
-    protected $hidden = ['updated_at', 'deleted_at', 'id', 'created_at','client_id','user_id'];
+    protected $fillable = ['id', 'client_id', 'user_id', 'products', 'payment_method', 'card_number', 'card_cvc', 'expiration_date'];
+    protected $hidden = ['updated_at', 'deleted_at', 'id', 'created_at'];
 	protected $table = 'sales';
 	public $incrementing = false;
 	protected $keyType = 'string';

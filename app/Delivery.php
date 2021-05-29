@@ -25,13 +25,7 @@ class Delivery extends Model
 			$sku = 'DEL'.str_pad((intval(substr($delivery->id, 3)) + 1), 3, '0', STR_PAD_LEFT);
 		$this->attributes['id'] = $sku;
 	}
-
-    public function scopeDeliveries($query, $user)
-    {
-        return $query->where('user_id', $user->id)->select('id as sku', 'place', 'status');
-    }
-
-    public function Sales() 
+    public function Sale() 
     {
         return $this->belongsTo('App\Sale');
     }

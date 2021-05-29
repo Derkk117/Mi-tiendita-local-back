@@ -49,15 +49,8 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::get('/address/{id}/edit','AddressesController@edit');
 	Route::put('/address/{address}/update','AddressesController@update');
 
-	Route::get('/stores','StoresController@index');
-	Route::post('/stores','StoresController@store');
-	Route::get('/store/{store}/edit','StoresController@edit');
-	Route::put('/store/{store}/update','StoresController@update');
-
 	Route::post('/cutoff', 'CutoffController@store');
-	Route::get('/cutoff/{user}', 'CutoffController@index');
-	Route::get('/cutoff/{cutoff}/edit', 'CutoffController@edit');
+	Route::get('/cutoff', 'CutoffController@index');
+	Route::get('/cutoff/{id}/edit', 'CutoffController@edit');
 	Route::delete('/cutoff/{cutoff}/destroy', 'CutoffController@destroy');
-	Route::get('/histories/{user}', 'HistoriesController@index');
-	Route::post('/histories','HistoriesController@store');
 });
