@@ -49,6 +49,15 @@ class AddressesController extends Controller
         }
     }
 
+    public function last()
+    {
+        $address = Address::where('id','>=','1')->select('id')->latest('id')->first();
+        if($address) return $address;
+        else {
+            $this->status = 404;
+            return response()->json(['Message'=> 'Not found','status' => $this->status], $this->status);
+        }
+    }
     
     public function update(AddressUpdate $request, Address $address)
     {
