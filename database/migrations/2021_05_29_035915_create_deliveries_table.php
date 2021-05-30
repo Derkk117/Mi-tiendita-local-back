@@ -14,7 +14,7 @@ class CreateDeliveriesTable extends Migration
     public function up()
     {
         Schema::create('deliveries', function (Blueprint $table) {
-            $table->string('id', 50)->unique()->index();
+            $table->id();
             $table->string('sale_id',50)->unique();
             $table->date('estimated_date')->nullable()->change();
             $table->date('delivered_date')->nullable()->change();
