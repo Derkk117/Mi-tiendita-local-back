@@ -15,7 +15,6 @@ class CreateClientsTable extends Migration
             $table->string('name', 30);
             $table->string('last_name', 30);
             $table->string('email')->unique();
-            $table->string('password');
             $table->enum('payment_method', ['cash', 'card']);
             $table->string('phone', 30);
             $table->enum('client_type', ['whatsApp', 'facebook', 'instagram']);
