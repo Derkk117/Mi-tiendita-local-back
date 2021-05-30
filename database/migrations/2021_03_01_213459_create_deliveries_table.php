@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateDeliveriesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('deliveries', function (Blueprint $table) {
@@ -23,15 +18,10 @@ class CreateDeliveriesTable extends Migration
             $table->softDeletes();
             $table->timestamps();
 
-			$table->foreign('sale_id')->references('id')->on('sales');
+	    $table->foreign('sale_id')->references('id')->on('sales');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('deliveries');

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class IdDeliveries extends Migration
+class ChangeColumnTypeToIdOnDeliveries extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class IdDeliveries extends Migration
      */
     public function up()
     {
-        Schema::table('deliveries',function(Blueprint $table){
-            $table->string('id',50)->unique()->change();
+        Schema::table('deliveries', function (Blueprint $table) {
+            $table->string('id')->unique()->change();
         });
     }
 
@@ -25,8 +25,8 @@ class IdDeliveries extends Migration
      */
     public function down()
     {
-        Schema::table('deliveries',function(Blueprint $table){
-            $table->dropColumn('id');
+        Schema::table('id_on_deliveries', function (Blueprint $table) {
+            $table->integer('id')->change();
         });
     }
 }
