@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -28,8 +29,7 @@ class Delivery extends Model
 
     public function scopeDeliveries($query, $user)
     {
-        return $query->where('user_id', $user->id)->select('id as sku', 
-		'place', 'status');
+        return \DB::select("SELECT * FROM `deliveries` WHERE sale_id IN (SELECT id FROM sales WHERE user_id = " . $user . " )");
     }
 
     public function Sales() 

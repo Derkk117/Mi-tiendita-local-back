@@ -6,10 +6,15 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateDeliveriesTable extends Migration
 {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
         Schema::create('deliveries', function (Blueprint $table) {
-            $table->id();
+            $table->string('id', 50)->unique()->index();
             $table->string('sale_id',50)->unique();
             $table->date('estimated_date')->nullable()->change();
             $table->date('delivered_date')->nullable()->change();
@@ -22,6 +27,11 @@ class CreateDeliveriesTable extends Migration
         });
     }
 
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
         Schema::dropIfExists('deliveries');
