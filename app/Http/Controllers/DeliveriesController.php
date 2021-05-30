@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Delivery;
 use Auth;
+use App\Delivery;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\DeliveryStore;
 use App\Http\Requests\DeliveryUpdate;
@@ -15,7 +16,7 @@ class DeliveriesController extends Controller
 
     public function index(User $user)
     {
-        return response()->json(Delivery::deliveries($user)->get());
+        return response()->json(Delivery::deliveries($user->id));
     }
 
     public function create()
@@ -31,8 +32,8 @@ class DeliveriesController extends Controller
 				return 'Se ha creado correctamente';
 			}catch(\Exception $e){
 				dd($e);
-				$this->status = 500;
-				return 'Hubo un error al registrar, intentelo nuevamente';
+				// $this->status = 500;
+				// return 'Hubo un error al registrar, intentelo nuevamente';
 			}
 		};
 	    return response()->json(['message' => \DB::transaction($create), 'status' => $this->status], $this->status);

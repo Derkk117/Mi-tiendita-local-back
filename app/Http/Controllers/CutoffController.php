@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Cutoff;
 use Auth;
+use App\Cutoff;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\CutoffStore;
 use App\Http\Requests\CutoffUpdate;

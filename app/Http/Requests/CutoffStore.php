@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;   
 
-class DeliveryStore extends FormRequest
+class CutoffStore extends FormRequest
 {
     public function authorize()
     {
@@ -22,18 +22,18 @@ class DeliveryStore extends FormRequest
     public function rules()
     {
         return [
-            // 'estimated_date' => 'required',
-            // 'delivered_date' => 'required',
-            'sale_id' => 'required'
+            'initial_date' => 'required',
+            'final_date' => 'required',
+            'total' => 'required'
         ];
     }
 
     public function messages()
     {
         return [
-            // 'estimated.required' => 'Estimated date is a required field',
-            // 'delivered_date.required' => 'Delivered date is a required field',
-            'sale_id.required' => 'Sale_id is a required field.'
+            'initial_date' => 'Initial date is a required field',
+            'final_date.required' => 'Final date is a required field',
+            'total.required' => 'Total is a required field.'
         ];
     }
 

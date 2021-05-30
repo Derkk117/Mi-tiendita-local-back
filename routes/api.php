@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::delete('/client/{client}/destroy', 'ClientsController@destroy');
 
 	Route::get('/products/{user}', 'ProductsController@index');
+	//Crear un nuevo producto
 	Route::post('/product', 'ProductsController@store');
 	Route::get('/product/{product}/edit', 'ProductsController@edit');
 	Route::post('/product/{product}/update', 'ProductsController@update');
@@ -47,6 +48,8 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::get('/address','AddressesController@index');
 	Route::get('/address/{id}/edit','AddressesController@edit');
 	Route::put('/address/{address}/update','AddressesController@update');
+	Route::get('/addressLast','AddressesController@last');
+	Route::post('/address','AddressesController@store');
 
 	Route::get('/stores','StoresController@index');
 	Route::post('/stores','StoresController@store');
