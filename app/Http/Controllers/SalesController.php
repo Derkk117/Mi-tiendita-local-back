@@ -26,9 +26,9 @@ class SalesController extends Controller
 				$sale = Sale::create($request->all());
 				return 'Se ha creado correctamente';
 			}catch(\Exception $e){
-				dd($e);
 				$this->status = 500;
 				return 'Hubo un error al registrar, intentelo nuevamente';
+				
 			}
 		};
 	    return response()->json(['message' => \DB::transaction($create), 'status' => $this->status], $this->status);
