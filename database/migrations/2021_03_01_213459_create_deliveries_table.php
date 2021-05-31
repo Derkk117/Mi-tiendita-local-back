@@ -18,7 +18,7 @@ class CreateDeliveriesTable extends Migration
             $table->softDeletes();
             $table->timestamps();
 
-			$table->foreign('sale_id')->references('id')->on('sales');
+	    $table->foreign('sale_id')->references('id')->on('sales');
         });
     }
 
