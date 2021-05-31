@@ -23,7 +23,7 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::get('/suppliers', 'SuppliersController@index');
 	Route::post('/suppliers', 'SuppliersController@store');
 	Route::get('/supplier/{supplier}/edit', 'SuppliersController@edit');
-	Route::put('/supplier/{supplier}/update', 'SuppliersController@update');
+	Route::put('/supplier/{slug}/update', 'SuppliersController@update');
 	Route::delete('/supplier/{supplier}/destroy', 'SuppliersController@destroy');
 
 	Route::post('/client', 'ClientsController@store');

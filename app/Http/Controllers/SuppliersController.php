@@ -34,7 +34,7 @@ class SuppliersController extends Controller
 
     public function edit($slug)
     {
-        $supplier = Supplier::where('slug', $slug)->select('name', 'last_name', 'phone','email','address')->first();
+        $supplier = Supplier::where('slug', $slug)->select('name','last_name', 'phone','email','address','slug')->first();
         if($supplier) return $supplier;
         else {
             $this->status = 404;
@@ -42,8 +42,9 @@ class SuppliersController extends Controller
         }
     }
 
-    public function update(SupplierUpdate $request, Supplier $supplier)
+    public function update(SupplierUpdate $request, /*Supplier $supplier*/$slug)
     {
+        $supplier = Supplier::where('slug', $slug)->first();
         $create = function() use ($request, $supplier){
             try{
                 $supplier->fill($request->all());
