@@ -23,7 +23,7 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::get('/suppliers', 'SuppliersController@index');
 	Route::post('/suppliers', 'SuppliersController@store');
 	Route::get('/supplier/{supplier}/edit', 'SuppliersController@edit');
-	Route::put('/supplier/{supplier}/update', 'SuppliersController@update');
+	Route::put('/supplier/{slug}/update', 'SuppliersController@update');
 	Route::delete('/supplier/{supplier}/destroy', 'SuppliersController@destroy');
 
 	Route::post('/client', 'ClientsController@store');
@@ -37,7 +37,6 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::post('/product', 'ProductsController@store');
 	Route::get('/product/{product}/edit', 'ProductsController@edit');
 	Route::post('/product/{product}/update', 'ProductsController@update');
-	//Eliminar productos 
 	Route::delete('/product/{product}/destroy', 'ProductsController@destroy');
 
 	Route::post('/sales', 'SalesController@store');
