@@ -12,9 +12,9 @@ class SuppliersController extends Controller
 {
 	public $status = 200;
 
-    public function index()
+    public function index($id)
     {
-        return response()->json(Supplier::suppliers()->get());
+        return response()->json(Supplier::suppliers($id)->get());
     }
 
     public function store(SupplierStore $request)
