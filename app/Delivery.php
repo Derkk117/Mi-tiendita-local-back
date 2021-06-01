@@ -29,6 +29,7 @@ class Delivery extends Model
 
     public function scopeDeliveries($query, $user)
     {
+        
         return \DB::select("SELECT * FROM `deliveries` WHERE sale_id IN (SELECT id FROM sales WHERE user_id = " . $user . " )");
         return $query->where('user_id', $user->id)->select('id as sku', 'place', 'status');
     }
