@@ -10,8 +10,8 @@ class Supplier extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['id','name', 'last_name', 'phone' ,'email', 'address', 'slug'];
-    protected $hidden = ['updated_at', 'deleted_at', 'id', 'created_at'];
+    protected $fillable = ['id','name', 'last_name', 'phone' ,'email', 'address', 'slug', 'user_id'];
+    protected $hidden = ['updated_at', 'deleted_at', 'id', 'created_at','user_id'];
 	protected $table = 'suppliers';
 	public $incrementing = false;
 	protected $keyType = 'string';
@@ -33,9 +33,9 @@ class Supplier extends Model
 		$this->attributes['slug'] = Str::slug($this->attributes['name']." ".$this->attributes['last_name']." ".explode("@",$this->attributes['email'])[0], '-');
 	}
 
-    public function scopeSuppliers($query)
+    public function scopeSuppliers($query, $id)
     {
-        return $query->join('addresses','suppliers.address','addresses.id');
+        return $query->join('addresses','suppliers.address','addresses.id')->where('suppliers.user_id', $id);
     }
 
     public function Users()
