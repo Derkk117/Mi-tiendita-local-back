@@ -26,8 +26,7 @@ class ProductsController extends Controller
         {
             try{
                 if($image = $request->file('photo')){
-                    $image_name = "MTL_".date("Y_m_d_H_i_s").".".$image->extension();
-        
+                    $image_name = "MTL_".date("Y_m_d_H_i_s").".".$image->extension();        
                     $image->move("ProductImages",$image_name);
                     $request['image'] = "ProductImages/". $image_name;
                 }
@@ -51,20 +50,13 @@ class ProductsController extends Controller
     {
         $actualizar = function() use ($request, $product){
 			try{
-                // $prod = new Product;
-                // if($request->hash_file('image'))
-                // {
-                //     $file      = $request->file('image');
-                //     $filename  = $file->getClientOriginalName();                    
-                //     $fileNameOnly = pathinfo($filename, PATHINFO_FILENAME);
-                //     $extension = $file->getClientOriginalExtension();
-                //     //Ponerle a la imagen un nombre unico
-                //     $comp = str_replace(' ', '_', $fileNameOnly) . ' _'.time(). '.'. $extension;                    
-                //     //Guardar la imagen en la carpeta Public/ProductImages
-                //     $path = $request->file('image')->storeAs('public/ProductImages', $comp);
-                //     //Nombrar a la imagen
-                //     $prod->image = $comp;
-                // }
+                if($image = $request->file('photo')){
+                    $image_name = "MTL_".date("Y_m_d_H_i_s").".".$image->extension();        
+                    $image->move("ProductImages",$image_name);
+                    $request['image'] = "ProductImages/". $image_name;
+                }                
+
+                $request['slug'] = Str::slug($request->name." ".$request->category, '_');
                 $product->fill($request->all());
                 $product->save();
                 $this->status = 200;
@@ -110,7 +102,8 @@ class ProductsController extends Controller
          if($product) return $product;
          else {
              $this->status = 404;
-             return response()->json(['Message'=> 'Not found','status' => $this->status], $this->status);
+             return response()->json(['Message'=> 'Not found','status' => 
+             $this->status], $this->status);
          }
      }
 }
