@@ -25,12 +25,11 @@ class ProductsController extends Controller
         $create = function() use ($request)
         {
             try{
-                if($image = $request->file('photo')){
-                    $image_name = "MTL_".date("Y_m_d_H_i_s").".".$image->extension();        
-                    $image->move("ProductImages",$image_name);
+                if($picture = $request->file('photo')){
+                    $image_name = "MTL_".date("Y_m_d_H_i_s").".".$picture->extension();        
+                    $picture->move("ProductImages",$image_name);
                     $request['image'] = "ProductImages/". $image_name;
-                }
-                
+                }  
                 $request['slug'] = Str::slug($request->name." ".$request->category, '_');
                 $product = Product::create($request->all());
                 return 'Se ha creado correctamente';
@@ -50,9 +49,9 @@ class ProductsController extends Controller
     {
         $actualizar = function() use ($request, $product){
 			try{
-                if($image = $request->file('photo')){
-                    $image_name = "MTL_".date("Y_m_d_H_i_s").".".$image->extension();        
-                    $image->move("ProductImages",$image_name);
+                if($picture = $request->file('photo')){
+                    $image_name = "MTL_".date("Y_m_d_H_i_s").".".$picture->extension();        
+                    $picture->move("ProductImages",$image_name);
                     $request['image'] = "ProductImages/". $image_name;
                 }                
 

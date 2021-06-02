@@ -20,7 +20,7 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::put('/deliveries/{delivery}/update', 'DeliveriesController@update');
 	Route::delete('/deliveries/{delivery}/destroy', 'DeliveriesController@destroy');
 	
-	Route::get('/suppliers', 'SuppliersController@index');
+	Route::get('/suppliers/{id}', 'SuppliersController@index');
 	Route::post('/suppliers', 'SuppliersController@store');
 	Route::get('/supplier/{supplier}/edit', 'SuppliersController@edit');
 	Route::put('/supplier/{slug}/update', 'SuppliersController@update');
@@ -63,4 +63,6 @@ Route::group(['middleware' => 'auth:api'], function() {
 
 	Route::get('/histories/{user}', 'HistoriesController@index');
 	Route::post('/histories','HistoriesController@store');
+
+	Route::get('/mostSold/{user}/{year}/{month}', 'DashBoardController@mostSold');
 });
