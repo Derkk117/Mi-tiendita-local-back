@@ -26,7 +26,7 @@ class ChangeColumnTypeToJSONInSalesTable extends Migration
     public function down()
     {
         Schema::table('sales', function (Blueprint $table) {
-            $table->string('products');->change();
+            $table->string('products')->change();
         });
     }
 }
