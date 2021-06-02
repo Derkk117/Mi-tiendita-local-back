@@ -24,7 +24,7 @@ class DeliveryUpdate extends FormRequest
     {
         return [
             //'delivered_date' => 'required',
-            'sale_id' => 'required'
+            //'sale_id' => 'required'
         ];
     }
 
@@ -34,7 +34,7 @@ class DeliveryUpdate extends FormRequest
             'email.required' => 'El correo es un campo obligatorio',
             'email.email' => 'El correo debe que tener el siguiente formato correo@sacar.com',
             //'delivered_date' => 'La fecha de entrega se debe de ingresar',
-            'sale_id' => 'El ID de la venta es un campo obligatorio',
+            //'sale_id' => 'El ID de la venta es un campo obligatorio',
         ];
     }
 
