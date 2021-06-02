@@ -63,4 +63,6 @@ Route::group(['middleware' => 'auth:api'], function() {
 
 	Route::get('/histories/{user}', 'HistoriesController@index');
 	Route::post('/histories','HistoriesController@store');
+
+	Route::get('/mostSold/{user}/{year}/{month}', 'DashBoardController@mostSold');
 });
