@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', 'AuthController@login');
 Route::post('sign-up', 'UsersController@store');  
 Route::post('/address','AddressesController@store');
+Route::get('/store/{path}', 'StoresController@logoImage');
 
 Route::group(['middleware' => 'auth:api'], function() {
 	Route::post('/logout', 'AuthController@logout');

@@ -17,23 +17,18 @@ class StoresController extends Controller{
         return response()->json(Store::stores()->get());
     }
 
-    public function create()
-    {
-        
-    }
-    
     public function store(StoreStore $request){
         $create = function() use ($request){
             try{
                 if($image = $request->file('logo')){
                     $image_name = "MTL_".date("Y_m_d_H_i_s").".".$image->extension();        
                     $image->move("StoreImages",$image_name);
-                    $request['image'] = "StoreImages/". $image_name;
+                    $request['image'] = $image_name;
                 }
                 if($image = $request->file('thum')){
                     $image_name = "MTL_thum".date("Y_m_d_H_i_s").".".$image->extension();        
                     $image->move("StoreImages",$image_name);
-                    $request['thumbnails'] = "StoreImages/". $image_name;
+                    $request['thumbnails'] = $image_name;
                 }
                 $store = Store::create($request->all());
                 $user = User::where('id',$request->user_id)->first();
@@ -71,6 +66,10 @@ class StoresController extends Controller{
             }
         };
         return response()->json(['message'=>\DB::transaction($create), 'status' => $this->status], $this->status);
+    }
+
+    public function logoImage($path){
+        return response()->file("StoreImages/".$path);
     }
 }
 
