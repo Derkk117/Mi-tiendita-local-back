@@ -47,7 +47,6 @@ class ProductsController extends Controller
                     $picture->move("ProductImages",$image_name);
                     $request['image'] = "ProductImages/". $image_name;
                 }                
-
                 $request['slug'] = Str::slug($request->name." ".$request->category, '_');
                 $product->fill($request->all());
                 $product->save();
