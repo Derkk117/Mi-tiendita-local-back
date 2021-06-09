@@ -16,11 +16,9 @@ class ProductsController extends Controller
     
     public function index(User $user)
     {
-        //Para obtener todos los productos del usuario
         return response()->json(Product::products($user)->get());
     }
 
-    //Funcion de crear un nuevo producto    
     public function store(ProductStore $request)
     {
         $create = function() use ($request){
@@ -28,12 +26,13 @@ class ProductsController extends Controller
                 if($picture = $request->file('photo')){
                     $image_name = "MTL_".date("Y_m_d_H_i_s").".".$picture->extension();        
                     $picture->move("ProductImages",$image_name);
-                    $request['image'] = "ProductImages/". $image_name;
+                    $request['image'] = $image_name;
                 }  
                 $request['slug'] = Str::slug($request->name." ".$request->category, '_');
                 $product = Product::create($request->all());
                 return 'Se ha creado correctamente';
 			}catch(\Exception $e){
+                dd($e);
 				$this->status = 500;
 				return 'Hubo un error al registrar, intentelo nuevamente';				
 			}
@@ -41,7 +40,6 @@ class ProductsController extends Controller
 	    return response()->json(['message' => \DB::transaction($create), 'status' => $this->status], $this->status);
     }
 
-    //Funcion de actualizar un producto
     public function update(ProductUpdate $request, Product $product)
     {
         $actualizar = function() use ($request, $product){
@@ -66,8 +64,8 @@ class ProductsController extends Controller
         'status' => $this->status], $this->status);
     }
 
-    public function userImage($path){
-        return response()->file("ProductImage/".$path);
+    public function productImage($path){
+        return response()->file("ProductImages/".$path);
     }
 
     //Funcion de eliminar productos en donde muestra un cuadro de dialogo 
