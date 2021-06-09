@@ -30,8 +30,8 @@ class ProductsController extends Controller
 				return 'Se ha creado correctamente';
 			}catch(\Exception $e){
 				$this->status = 500;
-				//return 'Hubo un error al registrar, intentelo nuevamente';
-				return $e;
+				return 'Hubo un error al registrar, intentelo nuevamente';
+				
 			}
 		};
 	    return response()->json(['message' => \DB::transaction($create), 'status' => $this->status], $this->status);
