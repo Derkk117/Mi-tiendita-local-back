@@ -33,9 +33,8 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::put('/client/{client}/update', 'ClientsController@update');
 	Route::delete('/client/{client}/destroy', 'ClientsController@destroy');
 
+	Route::post('/product/{product}', 'ProductsController@store');
 	Route::get('/products/{user}', 'ProductsController@index');
-	//Crear un nuevo producto
-	Route::post('/product', 'ProductsController@store');
 	Route::get('/product/{product}/edit', 'ProductsController@edit');
 	Route::post('/product/{product}/update', 'ProductsController@update');
 	Route::delete('/product/{product}/destroy', 'ProductsController@destroy');
