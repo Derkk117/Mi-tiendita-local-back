@@ -20,14 +20,19 @@ class ProductsController extends Controller
         return response()->json(Product::products($user)->get());
     }
 
-    //Funcion de crear un nuevo producto
-    
+    //Funcion de crear un nuevo producto    
     public function store(ProductStore $request)
     {
         $create = function() use ($request){
 			try{
-				$product = Product::create($request->all());
-				return 'Se ha creado correctamente';
+                if($picture = $request->file('photo')){
+                    $image_name = "MTL_".date("Y_m_d_H_i_s").".".$picture->extension();        
+                    $picture->move("ProductImages",$image_name);
+                    $request['image'] = "ProductImages/". $image_name;
+                }  
+                $request['slug'] = Str::slug($request->name." ".$request->category, '_');
+                $product = Product::create($request->all());
+                return 'Se ha creado correctamente';
 			}catch(\Exception $e){
 				$this->status = 500;
 				return 'Hubo un error al registrar, intentelo nuevamente';
