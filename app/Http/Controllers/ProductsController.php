@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use App\User;
+use Auth;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductStore;
@@ -20,28 +21,20 @@ class ProductsController extends Controller
     }
 
     //Funcion de crear un nuevo producto
+    
     public function store(ProductStore $request)
     {
-        $create = function() use ($request)
-        {
-            try{
-                if($picture = $request->file('photo')){
-                    $image_name = "MTL_".date("Y_m_d_H_i_s").".".$picture->extension();        
-                    $picture->move("ProductImages",$image_name);
-                    $request['image'] = "ProductImages/". $image_name;
-                }  
-                $request['slug'] = Str::slug($request->name." ".$request->category, '_');
-                $product = Product::create($request->all());
-                return 'Se ha creado correctamente';
-            }catch(\Exception $e)
-            {
-                dd($e);
-                $this->status = 500;
-                return 'Hubo un error al registrar, intentelo nuevamente';
-            }
-        };
-        return response()->json(['message' => \DB::transaction($create), 
-        'status' => $this->status], $this->status);
+        $create = function() use ($request){
+			try{
+				$product = Product::create($request->all());
+				return 'Se ha creado correctamente';
+			}catch(\Exception $e){
+				$this->status = 500;
+				//return 'Hubo un error al registrar, intentelo nuevamente';
+				return $e;
+			}
+		};
+	    return response()->json(['message' => \DB::transaction($create), 'status' => $this->status], $this->status);
     }
 
     //Funcion de actualizar un producto

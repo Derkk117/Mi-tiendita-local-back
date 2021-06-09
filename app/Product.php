@@ -30,8 +30,11 @@ class Product extends Model
 
     public function setSlugAttribute($value)
 	{
-        $this->attributes['slug'] = Str::slug($this->attributes['name']." ".$this->attributes['category'], '_');
-	}
+       // $this->attributes['slug'] = Str::slug($this->attributes['name']." ".$this->attributes['category'], '_');
+       $this->attributes['slug'] = Str::slug($this->attributes['name']);
+	  
+
+    }
 
     public function scopeProducts($query, $user)
     {
